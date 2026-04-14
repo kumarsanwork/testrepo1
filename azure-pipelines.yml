@@ -6,20 +6,19 @@
 trigger:
 - main
 
-strategy: 
-  matrix:
-    linux:
-      imageName: 'ubuntu-latest'
-    windows:
-      imageName: 'windows-latest'
-  maxParallel: 2
-
-  pool:
-    vmImage: $(imageName)
+pool:
+  vmImage: 'ubuntu-latest'
 
 stages:
   - stage: Test1
     jobs:
       - job: Testjob1
+        strategy:
+          matrix:
+            linux:
+              imageName: 'ubuntu-latest'
+            windows:
+              imageName: 'windows-latest'
+          maxParallel: 2
         steps:
           - script: echo "Hello World"
